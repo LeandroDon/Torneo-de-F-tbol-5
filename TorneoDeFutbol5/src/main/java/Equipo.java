@@ -10,7 +10,7 @@ public class Equipo {
     private List<Partido> partidos;
     private int partidosJugados;
     private int goles;
-    
+
     public Equipo(String nombreEquipo) {
         this.nombreEquipo = nombreEquipo;
         this.jugadores = new ArrayList<>();
@@ -18,11 +18,11 @@ public class Equipo {
         this.puntos = 0;
         this.partidosJugados = 0;
     }
-       
+
     public static void inscribirEquipo(List<Equipo> equipos, Scanner scanner) {
         System.out.print("\nIngrese el nombre del equipo: ");
         String nombreEquipo = scanner.nextLine();
-    
+
         boolean equipoExistente = false;
         for (Equipo equipo : equipos) {
             if (equipo.getNombreEquipo().equalsIgnoreCase(nombreEquipo)) {
@@ -30,7 +30,7 @@ public class Equipo {
                 break;
             }
         }
-    
+
         if (!equipoExistente) {
             Equipo nuevoEquipo = new Equipo(nombreEquipo);
             equipos.add(nuevoEquipo);
@@ -39,7 +39,6 @@ public class Equipo {
             System.out.println("\nYa existe un equipo con ese nombre.");
         }
     }
-    
 
     public void inscribirJugador(Jugador jugador) {
         jugadores.add(jugador);
@@ -56,9 +55,9 @@ public class Equipo {
     public void agregarPartido(Partido partido) {
         partidos.add(partido);
     }
-    
+
     public int getPuntos() {
-        return 0;
+        return this.puntos;
     }
 
     public int getDiferenciaDeGoles() {

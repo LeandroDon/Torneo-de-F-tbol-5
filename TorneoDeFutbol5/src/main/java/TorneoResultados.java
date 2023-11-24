@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class TorneoResultados {
     private List<Equipo> equipos;
     private Scanner scanner;
-    
 
     public TorneoResultados(List<Equipo> equipos, Scanner scanner) {
         this.equipos = equipos;
@@ -13,10 +12,11 @@ public class TorneoResultados {
     }
 
     public void cargarEquiposDesdeJSON(String nombreArchivo) {
-    Json.cargarEquiposDesdeJSON(equipos, nombreArchivo);
+        Json.cargarEquiposDesdeJSON(equipos, nombreArchivo);
     }
+
     public void cargarResultados(Scanner scanner) {
-        
+
         cargarEquiposDesdeJSON("equipos.json");
         List<Equipo> primerosOchoEquipos = obtenerPrimerosOchoEquipos(equipos);
         if (primerosOchoEquipos.size() < 8) {
@@ -28,15 +28,15 @@ public class TorneoResultados {
 
         int opcion;
         do {
-        System.out.println("\nCARGA DE RESULTADOS\n");
-        System.out.println("1. Mostrar equipos y zonas");
-        System.out.println("2. Cargar resultados de partidos de Zona A");
-        System.out.println("3. Cargar resultados de partidos de Zona B");
-        System.out.println("4. Tablas de Posiciones Zonas");
-        System.out.println("5. Cargar resultado Tercer Puesto");
-        System.out.println("6. Cargar resultado Final");
-        System.out.println("7. Volver al menú principal\n");
-        System.out.print("Seleccione una opción: ");
+            System.out.println("\nCARGA DE RESULTADOS\n");
+            System.out.println("1. Mostrar equipos y zonas");
+            System.out.println("2. Cargar resultados de partidos de Zona A");
+            System.out.println("3. Cargar resultados de partidos de Zona B");
+            System.out.println("4. Tablas de Posiciones Zonas");
+            System.out.println("5. Cargar resultado Tercer Puesto");
+            System.out.println("6. Cargar resultado Final");
+            System.out.println("7. Volver al menú principal\n");
+            System.out.print("Seleccione una opción: ");
 
             opcion = scanner.nextInt();
             scanner.nextLine();
@@ -93,8 +93,6 @@ public class TorneoResultados {
         }
     }
 
-    
-
     private void cargarResultadosZona(List<Equipo> equiposZona) {
         TablaPosiciones tablaZona = new TablaPosiciones(equiposZona);
         System.out.println("Equipos en la zona:");
@@ -102,41 +100,43 @@ public class TorneoResultados {
 
         for (int i = 0; i < equiposZona.size(); i++) {
             for (int j = i + 1; j < equiposZona.size(); j++) {
-            Equipo equipoLocal = equiposZona.get(i);
-            Equipo equipoVisitante = equiposZona.get(j);
+                Equipo equipoLocal = equiposZona.get(i);
+                Equipo equipoVisitante = equiposZona.get(j);
 
-            System.out.println("\nIngrese el resultado para " + equipoLocal.getNombreEquipo() + " vs " + equipoVisitante.getNombreEquipo() + ": ");
-            System.out.print(equipoLocal.getNombreEquipo() + ": ");
-            int resultadoLocal = scanner.nextInt();
-            System.out.print(equipoVisitante.getNombreEquipo()+ ": ");
-            int resultadoVisitante = scanner.nextInt();
+                System.out.println("\nIngrese el resultado para " + equipoLocal.getNombreEquipo() + " vs "
+                        + equipoVisitante.getNombreEquipo() + ": ");
+                System.out.print(equipoLocal.getNombreEquipo() + ": ");
+                int resultadoLocal = scanner.nextInt();
+                System.out.print(equipoVisitante.getNombreEquipo() + ": ");
+                int resultadoVisitante = scanner.nextInt();
 
-            if (resultadoLocal > resultadoVisitante) {
-            equipoLocal.incrementarPuntos(3);
-            } else if (resultadoLocal < resultadoVisitante) {
-            equipoVisitante.incrementarPuntos(3);
-            } else {    
-            equipoLocal.incrementarPuntos(1);
-            equipoVisitante.incrementarPuntos(1);
+                if (resultadoLocal > resultadoVisitante) {
+                    equipoLocal.incrementarPuntos(3);
+                } else if (resultadoLocal < resultadoVisitante) {
+                    equipoVisitante.incrementarPuntos(3);
+                } else {
+                    equipoLocal.incrementarPuntos(1);
+                    equipoVisitante.incrementarPuntos(1);
+                }
+
+                equipoLocal.incrementarPartidosJugados();
+                equipoVisitante.incrementarPartidosJugados();
+                equipoLocal.agregarGoles(resultadoLocal);
+                equipoVisitante.agregarGoles(resultadoVisitante);
+            }
+
+            tablaZona.ordenarTabla();
         }
-
-        equipoLocal.incrementarPartidosJugados();
-        equipoVisitante.incrementarPartidosJugados();
-        equipoLocal.agregarGoles(resultadoLocal);
-        equipoVisitante.agregarGoles(resultadoVisitante);
     }
 
-        tablaZona.ordenarTabla();
-    }
-}
-    
     public void mostrarTablaPosiciones(List<Equipo> equiposZona) {
         Collections.sort(equiposZona, (equipo1, equipo2) -> equipo2.getPuntos() - equipo1.getPuntos());
 
         System.out.println("\nTabla de Posiciones:");
         System.out.printf("%-20s %-10s %-10s %-10s\n", "Equipo", "Puntos", "Partidos", "Goles");
         for (Equipo equipo : equiposZona) {
-            System.out.printf("%-20s %-10s %-10s %-10s\n", equipo.getNombreEquipo(), equipo.getPuntos(), equipo.getPartidosJugados(), equipo.getGoles());
+            System.out.printf("%-20s %-10s %-10s %-10s\n", equipo.getNombreEquipo(), equipo.getPuntos(),
+                    equipo.getPartidosJugados(), equipo.getGoles());
         }
     }
 }

@@ -28,18 +28,18 @@ public class Jugador {
         String nombreJugador = scanner.nextLine();
         System.out.print("Ingrese el apellido del jugador: ");
         String apellidoJugador = scanner.nextLine();
-                
+
         int numeroCamiseta;
         boolean numeroCamisetaExistente;
         do {
-        System.out.print("Ingrese el número de camiseta del jugador: ");
-        numeroCamiseta = Integer.parseInt(scanner.nextLine());
-        numeroCamisetaExistente = yaExisteCamiseta(numeroCamiseta, equipo.getJugadores());
-        if (numeroCamisetaExistente) {
-            System.out.println("\n¡El número de camiseta ya existe! Ingrese otro número.\n");
-        }
+            System.out.print("Ingrese el número de camiseta del jugador: ");
+            numeroCamiseta = Integer.parseInt(scanner.nextLine());
+            numeroCamisetaExistente = yaExisteCamiseta(numeroCamiseta, equipo.getJugadores());
+            if (numeroCamisetaExistente) {
+                System.out.println("\n¡El número de camiseta ya existe! Ingrese otro número.\n");
+            }
         } while (numeroCamisetaExistente);
-                        
+
         System.out.print("Ingrese el DNI del jugador: ");
         int dni = Integer.parseInt(scanner.nextLine());
         System.out.print("Ingrese la obra social del jugador: ");
@@ -66,7 +66,8 @@ public class Jugador {
                 esSubCapitan = true;
             }
         }
-        return new Jugador(nombreJugador, apellidoJugador, numeroCamiseta, dni, obraSocial, aptoMedico, esCapitan, esSubCapitan);
+        return new Jugador(nombreJugador, apellidoJugador, numeroCamiseta, dni, obraSocial, aptoMedico, esCapitan,
+                esSubCapitan);
     }
 
     // Método para verificar si ya hay un capitán en el equipo

@@ -22,7 +22,8 @@ public class TablaPosiciones {
                     return comparacionPorPuntos;
                 }
 
-                int comparacionPorDiferenciaDeGoles = Integer.compare(equipo2.getDiferenciaDeGoles(), equipo1.getDiferenciaDeGoles());
+                int comparacionPorDiferenciaDeGoles = Integer.compare(equipo2.getDiferenciaDeGoles(),
+                        equipo1.getDiferenciaDeGoles());
                 if (comparacionPorDiferenciaDeGoles != 0) {
                     return comparacionPorDiferenciaDeGoles;
                 }
@@ -34,15 +35,17 @@ public class TablaPosiciones {
     }
 
     private int obtenerResultadoDelPartido(Equipo equipo1, Equipo equipo2) {
-    return 0;
+        return 0;
     }
 
     public void mostrarTablaPosiciones() {
         System.out.println("\nTabla de Posiciones:");
         for (int i = 0; i < equipos.size(); i++) {
-            System.out.println((i + 1) + ". " + equipos.get(i).getNombreEquipo() + " - Puntos: " + equipos.get(i).getPuntos());
+            System.out.println(
+                    (i + 1) + ". " + equipos.get(i).getNombreEquipo() + " - Puntos: " + equipos.get(i).getPuntos());
         }
     }
+
     public Equipo getSegundoEquipo() {
         return null;
     }

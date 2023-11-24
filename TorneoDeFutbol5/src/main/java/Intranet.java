@@ -1,19 +1,19 @@
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Intranet {
 
-static Scanner scanner = new Scanner(System.in);
-private static List<Equipo> equipos;
+    static Scanner scanner = new Scanner(System.in);
+    private static List<Equipo> equipos;
 
-public static void menuIntranet(Scanner scanner, List<Equipo> equipos) throws IOException {
+    public static void menuIntranet(Scanner scanner, List<Equipo> equipos) throws IOException {
 
-Intranet.equipos = new ArrayList<>();    
+        Intranet.equipos = new ArrayList<>();
 
-   int opcion = 0;
-        
+        int opcion = 0;
+
         while (opcion != 3) {
             System.out.println("INTRANET\n");
             System.out.println("1. Cargar resultados");
@@ -26,7 +26,7 @@ Intranet.equipos = new ArrayList<>();
 
             switch (opcion) {
                 case 1:
-                    TorneoResultados torneoResultados = new TorneoResultados(Intranet.equipos, scanner);    
+                    TorneoResultados torneoResultados = new TorneoResultados(Intranet.equipos, scanner);
                     torneoResultados.cargarResultados(scanner);
                     break;
                 case 2:

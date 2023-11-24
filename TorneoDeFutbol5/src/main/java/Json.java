@@ -1,15 +1,15 @@
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 public class Json {
 
@@ -18,7 +18,7 @@ public class Json {
     public static void guardarEquiposEnJSON(List<Equipo> equipos, String nombreArchivo) throws IOException {
         JsonArray jsonArrayEquipos = new JsonArray();
         JsonArray jsonArrayEquiposExistentes = FileUtils.readJSONFromFile(nombreArchivo);
-        jsonArrayEquipos.addAll(jsonArrayEquiposExistentes);
+        // jsonArrayEquipos.addAll(jsonArrayEquiposExistentes);
 
         for (Equipo equipo : equipos) {
             JsonObject jsonEquipo = new JsonObject();
@@ -80,8 +80,7 @@ public class Json {
                         jsonJugador.get("obraSocial").getAsString(),
                         jsonJugador.get("aptoMedico").getAsString(),
                         jsonJugador.get("esCapitan").getAsBoolean(),
-                        jsonJugador.get("esSubCapitan").getAsBoolean()
-                );
+                        jsonJugador.get("esSubCapitan").getAsBoolean());
                 equipoExistente.inscribirJugador(jugador);
             }
         }
@@ -91,18 +90,21 @@ public class Json {
     public static class FileUtils {
 
         public static JsonArray readJSONFromFile(String nombreArchivo) {
-        JsonArray jsonArray = new JsonArray();
-        try (FileInputStream fileInputStream = new FileInputStream(nombreArchivo);
-         InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
-         BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-        jsonArray = gson.fromJson(bufferedReader, JsonArray.class);
-        } catch (IOException e) {
-        e.printStackTrace();
+            JsonArray jsonArray = new JsonArray();
+            try (FileInputStream fileInputStream = new FileInputStream(nombreArchivo);
+                    InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream,
+                            StandardCharsets.UTF_8);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+                jsonArray = gson.fromJson(bufferedReader, JsonArray.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return jsonArray;
         }
-        return jsonArray;
-}
+
         public static void writeJSONToFile(JsonArray jsonArray, String nombreArchivo) {
-            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(nombreArchivo, StandardCharsets.UTF_8))) {
+            try (BufferedWriter bufferedWriter = new BufferedWriter(
+                    new FileWriter(nombreArchivo, StandardCharsets.UTF_8))) {
                 gson.toJson(jsonArray, bufferedWriter);
             } catch (IOException e) {
                 e.printStackTrace();

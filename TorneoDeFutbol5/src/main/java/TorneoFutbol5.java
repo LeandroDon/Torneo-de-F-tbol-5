@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 class TorneoFutbol5 {
 
     public static List<Equipo> equipos = new ArrayList<>();
@@ -14,13 +13,17 @@ class TorneoFutbol5 {
         Usuario.cargarUsuariosDesdeJSON(listaUsuarios, "usuarios.json");
         Json.cargarEquiposDesdeJSON(equipos, "equipos.json");
 
-System.out.println(
-        "\n\033[36m* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" +
-        "\n\033[37m*                                                                                   *" +
-        "\n\033[36m*                       Bienvenido al Torneo de Fútbol 5 del                        *" +
-        "\n\033[37m*                               CLUB HACHA Y HACHA                                  *" +
-        "\n\033[36m*                                                                                   *" +
-        "\n\033[37m* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        System.out.println(
+                "\n\033[36m* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" +
+                        "\n\033[37m*                                                                                   *"
+                        +
+                        "\n\033[36m*                       Bienvenido al Torneo de Fútbol 5 del                        *"
+                        +
+                        "\n\033[37m*                               CLUB HACHA Y HACHA                                  *"
+                        +
+                        "\n\033[36m*                                                                                   *"
+                        +
+                        "\n\033[37m* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
         int opcion;
         do {
@@ -34,14 +37,14 @@ System.out.println(
 
             switch (opcion) {
                 case 1:
-                    Json.cargarEquiposDesdeJSON(equipos, "equipos.json");    
+                    Json.cargarEquiposDesdeJSON(equipos, "equipos.json");
                     menuTorneo();
                     break;
                 case 2:
-                    if (Usuario.autenticarUsuario(listaUsuarios,scanner)) {
+                    if (Usuario.autenticarUsuario(listaUsuarios, scanner)) {
                         Intranet.menuIntranet(scanner, equipos);
-                    } 
-                break;
+                    }
+                    break;
                 case 3:
                     System.out.println("Gracias por participar en el torneo.");
                     break;
@@ -54,9 +57,8 @@ System.out.println(
                     break;
             }
         } while (opcion != 3);
-    scanner.close();
-}
-    
+        scanner.close();
+    }
 
     public static void menuTorneo() throws IOException {
 
@@ -87,7 +89,7 @@ System.out.println(
 
                     if (numeroEquipo >= 1 && numeroEquipo <= equipos.size()) {
                         Equipo equipoSeleccionado = equipos.get(numeroEquipo - 1);
-                        Jugador nuevoJugador = Jugador.inscribirJugador(scanner,equipoSeleccionado);
+                        Jugador nuevoJugador = Jugador.inscribirJugador(scanner, equipoSeleccionado);
                         equipoSeleccionado.inscribirJugador(nuevoJugador);
                         System.out.println("El jugador ha sido agregado al equipo con éxito.");
                     } else {
@@ -96,18 +98,18 @@ System.out.println(
                     break;
                 case 3:
                     for (Equipo equipo : equipos) {
-                    System.out.println();
-                    System.out.println("Equipo: " + equipo.getNombreEquipo());
+                        System.out.println();
+                        System.out.println("Equipo: " + equipo.getNombreEquipo());
                         if (!equipo.getJugadores().isEmpty()) {
                             System.out.println("Jugadores del equipo:");
                             for (Jugador jugador : equipo.getJugadores()) {
-                            System.out.println(jugador);
+                                System.out.println(jugador);
                             }
-                    } else {
-                        System.out.println("Este equipo no tiene jugadores.");
+                        } else {
+                            System.out.println("Este equipo no tiene jugadores.");
+                        }
                     }
-                    }
-                break;
+                    break;
                 case 4:
                     Json.guardarEquiposEnJSON(equipos, "equipos.json");
                     break;
